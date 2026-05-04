@@ -69,11 +69,12 @@ function calculateParkingFee(hours) {
     let fee = 0;
     if (hours <= 2) {
         fee = hours * 50;
-    } else if (hours <= 5) {
+    } else if (hours > 2) {
         fee = 2 * 50 + (hours - 2) * 30;
     }
     return "The parking fee is: $" + fee;
 }
 console.log(calculateParkingFee(1));
 console.log(calculateParkingFee(3));
+console.log(calculateParkingFee(6));
 
