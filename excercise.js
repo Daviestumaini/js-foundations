@@ -42,3 +42,38 @@ let P = 1000;
 let R = 5;
 let SI = (P * R * 5) / 100;
 console.log("The simple interest is: " + SI);
+
+
+// Mobile Airtime Purchase Validator
+function validateAirtimePurchase(amount, phoneNumber,balance) {
+    if (phoneNumber.length !== 10) {
+        return "Invalid phone number. It should be 10 digits long.";
+    }
+    if (amount < 1) {
+        return "Invalid amount. It should be at least $1.";
+    }
+    if (balance < amount) {
+        return "Insufficient balance.";
+    }
+    return "Airtime purchase is valid.";
+    balance -= amount;
+    return "Airtime purchase successful. New balance: $" + balance;
+}
+console.log(validateAirtimePurchase(10, "1234567890", 50));
+console.log(validateAirtimePurchase(0, "1234567890", 50));
+console.log(validateAirtimePurchase(10, "123456789", 50));
+console.log(validateAirtimePurchase(10, "1234567890", 5));
+
+// Parking Fee Calculator
+function calculateParkingFee(hours) {
+    let fee = 0;
+    if (hours <= 2) {
+        fee = hours * 50;
+    } else if (hours <= 5) {
+        fee = 2 * 50 + (hours - 2) * 30;
+    }
+    return "The parking fee is: $" + fee;
+}
+console.log(calculateParkingFee(1));
+console.log(calculateParkingFee(3));
+
