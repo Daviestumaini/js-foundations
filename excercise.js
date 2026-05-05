@@ -166,3 +166,39 @@ function calculateFinalAmount(itemPrices) {
 const items = [1200, 850, 3400, 600];
 console.log(calculateFinalAmount(items));
 
+// Ride-Hailing Fare & Acceptance System
+// This function calculates the fare for a ride based on the distance traveled and determines if the driver accepts the ride based on a minimum fare threshold.
+function calculateFare(distance) {
+  const baseFare = 5; // Base fare for the first kilometer
+  const perKmRate = 2; // Rate per kilometer after the first kilometer
+  const minimumFare = 10; // Minimum fare threshold for driver acceptance
+  const peakHourSurcharge = 0.20; // 20% surcharge during peak hours
+  const isPeakHour = false; // Change to true if it's peak hour
+  let fare = baseFare;
+  // Calculating fare based on distance traveled
+  if (distance > 1) {
+    fare += (distance - 1) * perKmRate;
+  }
+  // Checking if the calculated fare meets the minimum fare threshold for driver acceptance
+  if (fare < minimumFare) {
+    return "Fare is below the minimum threshold. Driver may not accept the ride.";
+  }
+  // If the time is during peak hours(morning or evening), apply a surcharge to the fare
+  // Applying peak hour surcharge if applicable
+  if (isPeakHour){
+    fare += fare * peakHourSurcharge;
+  }
+  return fare;
+}
+// Example usage:
+const distanceTraveled = 5;
+const fare = calculateFare(distanceTraveled);
+console.log("The calculated fare for the ride is: $" + fare.toFixed(2));
+const acceptedRide = fare >= 10 ? "Driver accepts the ride." : "Driver may not accept the ride.";
+console.log(acceptedRide);
+const isPeakHour = true; // Change to true if it's peak hour
+if (isPeakHour) {
+  console.log("It's peak hour. A surcharge has been applied to the fare.");
+}
+
+
