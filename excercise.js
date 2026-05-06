@@ -201,4 +201,49 @@ if (isPeakHour) {
   console.log("It's peak hour. A surcharge has been applied to the fare.");
 }
 
+// Smart Inventory Management 
+// This function manages inventory by checking stock levels, updating inventory after sales, and generating restock alerts when stock is low.
+const products = [
+  { name: "Widget A", stock: 5, minStockLevel: 10, isDiscontinued: false },
+  { name: "Widget B", stock: 15, minStockLevel: 10, isDiscontinued: false },
+  { name: "Widget C", stock: 3, minStockLevel: 8, isDiscontinued: true },
+  { name: "Widget D", stock: 2, minStockLevel: 5, isDiscontinued: false },
+];
+
+function getRestockList(products) {
+  return products.filter(product =>
+    product.stock < product.minStockLevel && !product.isDiscontinued
+  );
+}
+// The stock < minStockLevel condition checks if the current stock of the product is below the minimum stock level, indicating that it needs restocking. The !product.isDiscontinued condition ensures that only products that are not discontinued are included in the restock list.
+// The !isDiscontinued condition is important because it prevents discontinued products from being included in the restock list, even if their stock levels are low. This ensures that the inventory management system focuses on products that are still being sold and avoids unnecessary restocking of items that are no longer available for sale.
+// Both conditions should be true for a product to be included in the restock list, meaning that the product must have low stock and must not be discontinued. This helps maintain an efficient inventory management system by prioritizing restocking efforts on products that are still active and in demand.
+const restockList = getRestockList(products);
+console.log("Needs Restocking:", restockList.map(p => p.name));
+// Output: ["Widget A", "Widget D"]
+console.log("The products that are not discounted arwe: " + products.filter(p => !p.isDiscontinued).map(p => p.name));
+
+// Event Ticketing System
+// This function manages event ticketing by checking ticket availability, processing ticket purchases, and generating sales reports.
+const attendees = [
+  { name: "Alice", hasTicket: true,  age: 21, hasSpecialPermission: false },
+  { name: "Bob",   hasTicket: true,  age: 16, hasSpecialPermission: false },
+  { name: "Carol", hasTicket: false, age: 25, hasSpecialPermission: false },
+  { name: "Dave",  hasTicket: true,  age: 16, hasSpecialPermission: true  },
+  { name: "Eve",   hasTicket: true,  age: 19, hasSpecialPermission: false },
+];
+
+// The getAllowedEntrants function filters the attendees based on their ticket status, age, and special permissions. It checks if the attendee has a ticket and if they are either of legal age (18 or older) or have special permission to attend the event. This ensures that only eligible attendees are allowed entry to the event.
+// The age >= REQUIRED_AGE condition checks if the attendee is of legal age (18 or older) to attend the event. The hasSpecialPermission condition allows attendees who are underage but have special permission to attend the event. This combination of conditions ensures that the event can accommodate attendees with special circumstances while still enforcing age restrictions for general admission.
+// Both conditions should be true for an attendee to be allowed entry, meaning that the attendee must have a ticket and must either be of legal age or have special permission. This helps maintain a safe and compliant event environment while also allowing for flexibility in attendance based on individual circumstances.
+const REQUIRED_AGE = 18;
+
+function getAllowedEntrants(attendees) {
+  return attendees.filter(attendee =>
+    attendee.hasTicket && (attendee.age >= REQUIRED_AGE || attendee.hasSpecialPermission)
+  );
+}
+
+const allowed = getAllowedEntrants(attendees);
+console.log("The attendees that are allowed and have a ticket are: " + allowed.map(a => a.name));
 
